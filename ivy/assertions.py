@@ -97,6 +97,7 @@ def check_any(results, message="all of the args are False"):
     if not ivy.any(results):
         raise ivy.exceptions.IvyException(message)
 
+def my_type(x): return type(x)
 
 def check_all_or_any_fn(
     *args,
@@ -106,6 +107,9 @@ def check_all_or_any_fn(
     message="args must exist according to type and limit given"
 ):
     if type == "all":
+        # print('-------------------------')
+        # print([(fn(arg), my_type(arg)) for arg in args])
+        # print('-------------------------')
         check_all([fn(arg) for arg in args], message)
     elif type == "any":
         count = 0
